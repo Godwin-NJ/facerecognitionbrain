@@ -24,18 +24,18 @@ class Register extends React.Component  {
         // console.log(this.state);
         fetch('http://localhost:3000/register', {
             method:'post',
-            headers:{'content-Type':'application/json'},
+            headers:{'Content-Type':'application/json'},
             body:JSON.stringify({
                 email:this.state.email,
-                passwword:this.state.password,
+                password:this.state.password,
                 name:this.state.name
-            })  
+            }) 
         })
         .then(response =>response.json())
         .then(user => {
             if(user){
                this.props.loadUser(user)
-                this.props.onRouteChange('home');
+               this.props.onRouteChange('home');
             }
             // i have a error here, thats why else was used but it shouldn't
             // be used as this allows anyone login
@@ -56,34 +56,34 @@ class Register extends React.Component  {
         <div className="mt3">
             <label className="db fw6 lh-copy f6" htmlFor="email-address">Name</label>
             <input className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" 
-            type="text" name="name"  
-            id="name" 
-            onChange={this.onNameChange}
+                type="text" name="name"  
+                id="name" 
+                onChange={this.onNameChange}
             />
         </div>
         <div className="mt3">
             <label className="db fw6 lh-copy f6" htmlFor="email-address">Email</label>
             <input className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" 
-            type="email" name="email-address"  
-            id="email-address" 
-            onChange={this.onEmailChange}
+                type="email" name="email-address"  
+                id="email-address" 
+                onChange={this.onEmailChange}
             />
         </div>
         <div className="mv3">
             <label className="db fw6 lh-copy f6" htmlFor="password" >Password</label>
             <input className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" 
-            type="password" 
-            name="password"  
-            id="password"
-            onChange={this.onPasswordChange}
+                type="password" 
+                name="password"  
+                id="password"
+                onChange={this.onPasswordChange}
             />
         </div>
         </fieldset>
         <div className="">
         <input 
-        onClick={this.onSubmitSignin }
-        className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" 
-        type="submit" value="Register" />
+            onClick={this.onSubmitSignin }
+            className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" 
+            type="submit" value="Register" />
         </div>
     </div>
   </main>

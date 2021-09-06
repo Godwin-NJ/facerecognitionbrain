@@ -19,23 +19,25 @@ class Signin extends React.Component   {
         onSubmitSignin = () => {
             // console.log(this.state);
             fetch('http://localhost:3000/signin', {
-                method:'post',
-                headers:{'content-Type':'application/json'},
-                body:JSON.stringify({
-                email:this.state.signInEmail,
-                passwword:this.state.signInPassword
-                }) 
-            })
-            .then(response =>response.json())
-            .then(data => {
-                if(data === 'success'){
+                method: 'post',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                  email: this.state.signInEmail,
+                  password: this.state.signInPassword
+                })
+              })
+              .then(response => response.json())
+              .then(user => {
+                //   should be {user.id not user} if my server signin route works well 
+                if(user.id){
+                    this.props.loadUser(user)
                     this.props.onRouteChange('home');
                 }
-                // i have a error here, thats why else was used but it shouldn't
+                // i have an error here, thats why else was used but it shouldn't
                 // be used as this allows anyone login
-                else{
-                    this.props.onRouteChange('home');
-                }
+                // else{
+                //     this.props.onRouteChange('home');
+                // }
             })                     
         }
 
@@ -67,11 +69,14 @@ class Signin extends React.Component   {
             <div className="">
             <input 
             onClick={this.onSubmitSignin}
-            className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" 
-            type="submit" value="Sign in" />
+                className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" 
+                type="submit" 
+                value="Sign in" />
             </div>
             <div className="lh-copy mt3">
-            <p  onClick={() => onRouteChange('register')} className="f6 link dim black db pointer">Register</p>
+            <p  onClick={() => onRouteChange('register')} className="f6 link dim black db pointer">
+                Register
+            </p>
             </div>
         </div>
         </main>
